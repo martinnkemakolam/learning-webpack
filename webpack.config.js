@@ -8,8 +8,10 @@ module.exports = {
     },
     output: {
         path: path.join(__dirname, 'test'),
-        filename: 'test.js'
+        filename: '[name][contenthash].js',
+        clean: true
     },
+    devTool: 'source-map',
     module: {
         rules: [{
           test: /\.scss$/,
@@ -22,5 +24,15 @@ module.exports = {
             filename: 'index.html',
             template: 'src/temp.html'
         })
-    ]
+    ],
+    devServer: {
+        static: {
+            directory: path.join(__dirname, '/test')
+        },
+        hot: true,
+        open: true,
+        port: 3100,
+        historyApiFallback: true,
+        compress: true
+    }
 }
